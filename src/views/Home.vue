@@ -65,6 +65,11 @@ export default {
         .then(response => {
           var recipe = response.data;
           this.recipes.push(recipe);
+          this.newRecipeTitle = "";
+          this.newRecipeChef = "";
+          this.newRecipeIngredients = "";
+          this.newRecipeDirections = "";
+          this.newRecipePrepTime = "";
           console.log("Success", recipe);
         })
         .catch(error => console.log(error.response));
