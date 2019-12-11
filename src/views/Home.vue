@@ -3,7 +3,7 @@
     <h1>{{ message }}</h1>
     <div v-for="recipe in recipes">
       <h3>{{ recipe.title }}</h3>
-      <button v-on:click="currentRecipe = recipe">More info</button>
+      <button v-on:click="showRecipe(recipe)">More info</button>
       <div v-if="recipe === currentRecipe">
         <img v-bind:src="recipe.image_url" alt="" />
         <p>Ingredients: {{ recipe.ingredients }}</p>
@@ -77,6 +77,13 @@ export default {
           console.log("Success", recipe);
         })
         .catch(error => console.log(error.response));
+    },
+    showRecipe: function(recipe) {
+      if (this.currentRecipe === recipe) {
+        this.currentRecipe = {};
+      } else {
+        this.currentRecipe = recipe;
+      }
     }
   }
 };
