@@ -9,6 +9,16 @@
     </div>
 
     <h1>New recipe</h1>
+    Title:
+    <input type="text" v-model="newRecipeTitle" />
+    Chef:
+    <input type="text" v-model="newRecipeChef" />
+    Ingredients:
+    <input type="text" v-model="newRecipeIngredients" />
+    Directions:
+    <input type="text" v-model="newRecipeDirections" />
+    Prep Time:
+    <input type="text" v-model="newRecipePrepTime" />
     <button v-on:click="createRecipe()">Create</button>
   </div>
 </template>
@@ -26,7 +36,12 @@ export default {
   data: function() {
     return {
       message: "Welcome to Vue.js!!!",
-      recipes: []
+      recipes: [],
+      newRecipeTitle: "",
+      newRecipeChef: "",
+      newRecipeIngredients: "",
+      newRecipeDirections: "",
+      newRecipePrepTime: ""
     };
   },
   created: function() {
@@ -39,11 +54,11 @@ export default {
     createRecipe: function() {
       console.log("Create the recipe...");
       var params = {
-        input_title: "Another Example title",
-        input_chef: "Example chef",
-        input_ingredients: "Example ingredients",
-        input_directions: "Example directions",
-        input_prep_time: 12
+        input_title: this.newRecipeTitle,
+        input_chef: this.newRecipeChef,
+        input_ingredients: this.newRecipeIngredients,
+        input_directions: this.newRecipeDirections,
+        input_prep_time: this.newRecipePrepTime
       };
       axios
         .post("/api/recipes", params)
