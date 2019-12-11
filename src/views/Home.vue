@@ -7,6 +7,9 @@
       <p>Ingredients: {{ recipe.ingredients }}</p>
       <p>Directions: {{ recipe.directions }}</p>
     </div>
+
+    <h1>New recipe</h1>
+    <button v-on:click="createRecipe()">Create</button>
   </div>
 </template>
 
@@ -32,6 +35,25 @@ export default {
       console.log(this.recipes);
     });
   },
-  methods: {}
+  methods: {
+    createRecipe: function() {
+      console.log("Create the recipe...");
+      var params = {
+        input_title: "Another Example title",
+        input_chef: "Example chef",
+        input_ingredients: "Example ingredients",
+        input_directions: "Example directions",
+        input_prep_time: 12
+      };
+      axios
+        .post("/api/recipes", params)
+        .then(response => {
+          var recipe = response.data;
+          this.recipes.push(recipe);
+          console.log("Success", recipe);
+        })
+        .catch(error => console.log(error.response));
+    }
+  }
 };
 </script>
