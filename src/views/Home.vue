@@ -3,9 +3,12 @@
     <h1>{{ message }}</h1>
     <div v-for="recipe in recipes">
       <h3>{{ recipe.title }}</h3>
-      <img v-bind:src="recipe.image_url" alt="" />
-      <p>Ingredients: {{ recipe.ingredients }}</p>
-      <p>Directions: {{ recipe.directions }}</p>
+      <button v-on:click="currentRecipe = recipe">More info</button>
+      <div v-if="recipe === currentRecipe">
+        <img v-bind:src="recipe.image_url" alt="" />
+        <p>Ingredients: {{ recipe.ingredients }}</p>
+        <p>Directions: {{ recipe.directions }}</p>
+      </div>
     </div>
 
     <h1>New recipe</h1>
@@ -37,6 +40,7 @@ export default {
     return {
       message: "Welcome to Vue.js!!!",
       recipes: [],
+      currentRecipe: {},
       newRecipeTitle: "",
       newRecipeChef: "",
       newRecipeIngredients: "",
