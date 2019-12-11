@@ -3,13 +3,18 @@
     <h1>{{ message }}</h1>
     <div v-for="recipe in recipes">
       <h3>{{ recipe.title }}</h3>
+      <img v-bind:src="recipe.image_url" alt="" />
       <p>Ingredients: {{ recipe.ingredients }}</p>
       <p>Directions: {{ recipe.directions }}</p>
     </div>
   </div>
 </template>
 
-<style></style>
+<style>
+img {
+  width: 300px;
+}
+</style>
 
 <script>
 import axios from "axios";
