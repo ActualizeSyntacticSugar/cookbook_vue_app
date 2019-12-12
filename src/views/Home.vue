@@ -4,6 +4,7 @@
     <div v-for="recipe in recipes">
       <h3>{{ recipe.title }}</h3>
       <button v-on:click="showRecipe(recipe)">More info</button>
+      <button v-on:click="destroyRecipe(recipe)">Destroy</button>
       <div v-if="recipe === currentRecipe">
         <img v-bind:src="recipe.image_url" alt="" />
         <p>Ingredients: {{ recipe.ingredients }}</p>
@@ -113,6 +114,14 @@ export default {
       };
       axios.patch("/api/recipes/" + recipe.id, params).then(response => {
         console.log(response);
+      });
+    },
+    destroyRecipe: function(recipe) {
+      console.log("Destroying recipe", recipe);
+      axios.delete("/api/recipes/" + recipe.id).then(response => {
+        console.log("Success!", response);
+        var index = this.recipes.indexOf(recipe);
+        this.recipes.splice(index, 1);
       });
     }
   }
