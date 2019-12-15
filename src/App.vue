@@ -14,6 +14,8 @@
       <router-link to="/logout">Logout</router-link>
       |
       <router-link to="/recipes">All Recipes</router-link>
+      |
+      <router-link to="/recipes/new">New Recipe</router-link>
     </div>
     <router-view />
   </div>
