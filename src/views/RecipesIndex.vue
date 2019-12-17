@@ -5,6 +5,7 @@
       <h3>{{ recipe.title }}</h3>
       <img v-bind:src="recipe.image_url" alt="" />
       <p>Ingredients: {{ recipe.ingredients }}</p>
+      <router-link v-bind:to="`/recipes/${recipe.id}`">Home</router-link>
     </div>
   </div>
 </template>
