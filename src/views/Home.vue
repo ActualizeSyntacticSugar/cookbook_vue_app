@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <div v-for="recipe in recipes">
+    <div v-for="recipe in recipes" v-bind:class="{ selected: recipe === currentRecipe }">
       <h3>{{ recipe.title }}</h3>
       <button v-on:click="showRecipe(recipe)">More info</button>
       <button v-on:click="destroyRecipe(recipe)">Destroy</button>
@@ -46,6 +46,11 @@
 <style>
 img {
   width: 300px;
+}
+.selected {
+  color: white;
+  background-color: steelBlue;
+  transition: background-color 2s ease;
 }
 </style>
 
