@@ -8,12 +8,14 @@
         <option v-for="recipe in recipes">{{ recipe.title }}</option>
       </datalist>
     </div>
-    <div v-for="recipe in filterBy(recipes, titleFilter, 'title', 'ingredients')">
-      <h3>{{ recipe.title }}</h3>
-      <img v-bind:src="recipe.image_url" alt="" />
-      <p>Ingredients: {{ recipe.ingredients }}</p>
-      <router-link v-bind:to="`/recipes/${recipe.id}`">Home</router-link>
-    </div>
+    <transition-group appear enter-active-class="animated jello" leave-active-class="animated flipOutX">
+      <div v-for="recipe in filterBy(recipes, titleFilter, 'title', 'ingredients')" v-bind:key="recipe.id">
+        <h3>{{ recipe.title }}</h3>
+        <img v-bind:src="recipe.image_url" alt="" />
+        <p>Ingredients: {{ recipe.ingredients }}</p>
+        <router-link v-bind:to="`/recipes/${recipe.id}`">Home</router-link>
+      </div>
+    </transition-group>
   </div>
 </template>
 
