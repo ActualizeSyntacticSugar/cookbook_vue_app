@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <div v-for="recipe in recipes">
+    <div>
+      Search recipes:
+      <input type="text" v-model="titleFilter" />
+    </div>
+    <div v-for="recipe in filterBy(recipes, titleFilter, 'title', 'ingredients')">
       <h3>{{ recipe.title }}</h3>
       <img v-bind:src="recipe.image_url" alt="" />
       <p>Ingredients: {{ recipe.ingredients }}</p>
@@ -18,12 +22,15 @@ img {
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "Welcome to Vue.js!!!",
-      recipes: []
+      recipes: [],
+      titleFilter: ""
     };
   },
   created: function() {
