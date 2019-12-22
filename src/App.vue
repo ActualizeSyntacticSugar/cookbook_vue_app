@@ -62,18 +62,18 @@
       |
       <router-link to="/test">Show Test thing</router-link>
       |
-      <router-link to="/signup">Signup</router-link>
+      <router-link to="/signup" v-if="!jwt">Signup</router-link>
       |
-      <router-link to="/login">Login</router-link>
+      <router-link to="/login" v-if="!jwt">Login</router-link>
       |
-      <router-link to="/logout">Logout</router-link>
+      <router-link to="/logout" v-if="jwt">Logout</router-link>
       |
       <router-link to="/recipes">All Recipes</router-link>
       |
       <router-link to="/recipes/new">New Recipe</router-link>
     </div>
     <div class="container">
-      <router-view />
+      <router-view v-on:theJwtChanged="updateJwt()" />
     </div>
   </div>
 </template>
@@ -84,3 +84,21 @@ body {
   background-image: url("./assets/purty_wood.png");
 }
 </style>
+
+<script>
+export default {
+  data: function() {
+    return {
+      jwt: null
+    };
+  },
+  created: function() {
+    this.jwt = localStorage.jwt;
+  },
+  methods: {
+    updateJwt: function() {
+      this.jwt = localStorage.jwt;
+    }
+  }
+};
+</script>
