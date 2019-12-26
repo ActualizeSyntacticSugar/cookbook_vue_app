@@ -26,6 +26,10 @@
           <label>Prep time:</label>
           <input type="text" class="form-control" v-model="prep_time" />
         </div>
+        <div class="form-group">
+          <label>Image url:</label>
+          <input type="text" class="form-control" v-model="image_url" />
+        </div>
         <input type="submit" class="btn btn-primary" value="Submit" />
       </form>
     </div>
@@ -43,6 +47,7 @@ export default {
       ingredients: "",
       directions: "",
       prep_time: "",
+      image_url: "",
       errors: []
     };
   },
@@ -53,7 +58,8 @@ export default {
         input_chef: this.chef,
         input_ingredients: this.ingredients,
         input_directions: this.directions,
-        input_prep_time: this.prep_time
+        input_prep_time: this.prep_time,
+        input_image_url: this.image_url
       };
       axios
         .post("/api/recipes", params)
