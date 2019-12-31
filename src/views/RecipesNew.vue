@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
           <label>Image url:</label>
-          <input type="text" class="form-control" v-model="image_url" />
+          <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput" />
         </div>
         <input type="submit" class="btn btn-primary" value="Submit" />
       </form>
@@ -47,22 +47,34 @@ export default {
       ingredients: "",
       directions: "",
       prep_time: "",
-      image_url: "",
+      image_file: "",
       errors: []
     };
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image_file = event.target.files[0];
+      }
+    },
     submit: function() {
-      var params = {
-        input_title: this.title,
-        input_chef: this.chef,
-        input_ingredients: this.ingredients,
-        input_directions: this.directions,
-        input_prep_time: this.prep_time,
-        input_image_url: this.image_url
-      };
+      var formData = new FormData();
+      formData.append("input_title", this.title);
+      formData.append("input_chef", this.chef);
+      formData.append("input_ingredients", this.ingredients);
+      formData.append("input_directions", this.directions);
+      formData.append("input_prep_time", this.prep_time);
+      formData.append("input_image_file", this.image_file);
+      // var params = {
+      //   input_title: this.title,
+      //   input_chef: this.chef,
+      //   input_ingredients: this.ingredients,
+      //   input_directions: this.directions,
+      //   input_prep_time: this.prep_time,
+      //   input_image_url: this.image_url
+      // };
       axios
-        .post("/api/recipes", params)
+        .post("/api/recipes", formData)
         .then(response => {
           this.$router.push("/recipes");
         })
